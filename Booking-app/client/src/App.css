@@ -1,3 +1,14 @@
+
+.image-container {
+    width: 500px;
+    height: 500px;
+  }
+  
+  .image-container img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
 *{
     margin:  0 0 ;
     padding: 0 0;
@@ -64,6 +75,7 @@ button.primary {
     background-color: '#F5385D';
     @apply bg-primary p-2 w-full text-white rounded-2xl;
 }
+
 
 button:hover {
     color: black;
@@ -376,3 +388,95 @@ a {
       width: 49.99%;
   } */
 }
+
+
+
+
+.flex-options {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+    min-width: 600px;
+    max-width: 900px;
+    width: calc(100% - 100px);
+    height: 400px;
+  }
+  .card-option {
+    background-image: url("https://66.media.tumblr.com/f19901f50b79604839ca761cd6d74748/tumblr_o65rohhkQL1qho82wo1_1280.jpg");
+    border-radius: 10px;
+    transform: scale(1);
+    background-size: cover;
+    position: relative;
+    min-width: 60px;
+    margin:10px;
+    overflow: hidden;
+    background-size: auto 120%;
+    background-position: center;
+    cursor: pointer;
+    transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+  }
+  
+  .card-option:not(.active) {
+    flex-grow: 1;
+     border-radius: 30px;
+  }
+  .card-option.active {
+    flex-grow: 10000;
+    transform: scale(1);
+    max-width: 600px;
+    background-size: auto 100%;
+    border-radius: 40px;
+  }
+  .card-option .card-label {
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    height: 40px;
+    transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95); 
+  }
+  
+  .card-option:not(.active) .card-label {
+      bottom: 10px;
+      left: 10px;
+  }
+  
+  .card-option .icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: white;
+    color: #f3320a;
+  }
+  .card-option .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    color: white;
+    white-space: pre;
+  }
+  .card-option .info > * {
+    position: relative;
+    transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95), opacity 0.5s ease-out;
+  }
+  .card-option .info h4 {
+    font-weight: bold;
+    font-size: 18px;
+    margin:0 ;
+  }
+  .card-option.active .info > * {
+    left: 0;
+    opacity: 1;
+  }
+  
+  .card-option .info p {
+    margin: 0;
+  }
+
