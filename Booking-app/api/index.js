@@ -155,6 +155,11 @@ app.get('/places/:id', async (req,res) => {
     res.json(await Place.findById(id))
 });
 
+app.get('/details/:id' ,async(req,res) => {
+    const {id} = req.params;
+    res.json(await Place.findById(id))
+  });
+
 
 app.put('/places', async (req,res) =>{
     const {token} = req.cookies;
@@ -175,9 +180,6 @@ app.put('/places', async (req,res) =>{
     });
 });
 
-app.get('/places',async(req, res) => {
-  res.json(await Place.find())
-})
 
 app.post('/bookings',async (req, res) => {
    const userData = await getUserDataFromReq(req);
@@ -204,10 +206,44 @@ app.get('/user',async(req,res) => {
     res.json(await User.find())
   })
 
-  app.delete('/delete/:id' ,async(req,res) => {
+app.get('/places',async(req, res) => {
+    res.json(await Place.find())
+})
+
+app.get('/bookings1',async(req, res) => {
+    res.json(await Booking.find())
+})
+app.delete('/delete/:id' ,async(req,res) => {
     const id = req.params.id;
     await User.findByIdAndRemove(id).exec();
     res.send('delete');
-  })
+})
+
+app.delete('/deletePlace/:id' ,async(req,res) => {
+    const id = req.params.id;
+    await Place.findByIdAndRemove(id).exec();
+    res.send('delete');
+});
+
+app.delete('/deleteBooking/:id' ,async(req,res) => {
+    const id = req.params.id;
+    await Booking.findByIdAndRemove(id).exec();
+    res.send('delete');
+});
+
+
+app.get('/places', async (req, res) => {
+    const { title, address } = req.query;
+    const query = {};
+    if (title) {
+      query.title = { $regex: title, $options: 'i' };
+    }
+    if (address) {
+      query.address = { $regex: address, $options: 'i' };
+    }
+    const places = await Place.find(query);
+    res.json(places);
+  });
+  
 
 app.listen(4000);    
