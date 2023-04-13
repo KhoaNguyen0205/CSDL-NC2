@@ -31,7 +31,7 @@ export default function IndexPage() {
   
   return (
     <div>
-      <form id="place-form" onSubmit={handleFormSubmit}>
+      <form className="py-2 px-8 w-80 h-50" id="place-form" onSubmit={handleFormSubmit}>
         <label htmlFor="address">ADDRESS:</label>
         <input 
           type="text" 
@@ -40,7 +40,11 @@ export default function IndexPage() {
           value={searchValue} 
           onChange={handleSearchInputChange}
         />
-        <input className="bg-primary py-2 px-8 rounded-2xl" type="submit" value="Submit"/>
+        <button className="bg-primary py-2 px-8 rounded-2xl" type="submit" value="Submit" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+</svg> 
+        </button>
       </form>
       <div className="mt-8 ml-20 mr-20 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3">
         {places.length > 0 && places.map(place => (
@@ -58,7 +62,9 @@ export default function IndexPage() {
           </Link>
         ))}
       </div>
-      <FooterPage />
+      <div className="mt-20">      
+        <FooterPage /> 
+       </div>
     </div>
   ); 
 }

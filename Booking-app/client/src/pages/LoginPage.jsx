@@ -13,10 +13,13 @@ export default function LoginPage () {
     async function handleLoginSubmit(ev) {
         ev.preventDefault();
         try{
-        const {data}  = await axios.post('/login', {email,password});
-            setUser(data);
-            alert('login successful');
-            setRedirect(true);
+            const {data}  = await axios.post('/login', {email,password});
+            if((data.email !== 'admin@gmail.com')){
+              alert('Login successful');
+              setRedirect(true);
+            }else{
+              alert('Login Failed');    
+            }
         }catch(e){
             alert('login Failed');
         }
@@ -25,7 +28,6 @@ export default function LoginPage () {
     if(redirect) {
         return<Navigate to={'/'} />
     }
-
     return(
         <div className="mt-4 grow flex items-center justify-around">
             <div className="mb-64">

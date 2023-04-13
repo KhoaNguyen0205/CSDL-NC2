@@ -127,7 +127,7 @@ app.post('/places', (req,res) => {
     const {token} = req.cookies;
     const {
         title,address,photos,description,price,
-        perks,extraInfo,checkIn,checkOut,maxGuests,
+        perks,extraInfo,checkIn,checkOut,maxGuests,approval,
      } = req.body; 
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         if(err) throw err;
@@ -135,10 +135,10 @@ app.post('/places', (req,res) => {
             owner: userData.id,price,
             title,address,photos,description,
             perks,extraInfo,checkIn,checkOut,maxGuests,
+            approval:false,
         });
         res.json(placeDoc);
     });
-   
 })
 
 app.get('/user-places' , (req,res) => { 
@@ -147,7 +147,6 @@ app.get('/user-places' , (req,res) => {
         const {id} = userData;
         res.json( await Place.find({owner:id}));
     });
-
 });
 
 app.get('/places/:id', async (req,res) => {
@@ -172,12 +171,24 @@ app.put('/places', async (req,res) =>{
       if(userData.id === placeDoc.owner.toString()){
         placeDoc.set({
             title,address,photos,description,
-            perks,extraInfo,checkIn,checkOut,maxGuests,price
+            perks,extraInfo,checkIn,checkOut,maxGuests,price,
         });
         await placeDoc.save();
         res.json('ok');
       }
     });
+});
+app.put('/places/:id', (req, res) => {
+    const { id } = req.params;
+    const { approval } = req.body;
+    Place.findByIdAndUpdate(id, { approval }, { new: true })
+        .then(placeDoc => {
+            res.json(placeDoc);
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send("Lỗi cập nhật địa điểm");
+        });
 });
 
 
