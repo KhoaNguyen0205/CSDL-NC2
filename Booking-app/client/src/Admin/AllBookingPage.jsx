@@ -43,8 +43,6 @@ export default function AllBookingPage() {
       useEffect(() => {
         axios.get('/places').then(response => {
           setPlaces(response.data);
-          if(data._id === setBookings.place){
-          }
         });
       }, []);
 

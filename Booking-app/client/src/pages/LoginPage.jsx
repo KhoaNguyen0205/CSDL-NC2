@@ -25,9 +25,10 @@ export default function LoginPage () {
         }
     }
 
-    if(redirect) {
-        return<Navigate to={'/'} />
-    }
+    if (redirect) {
+        window.location.href = '/';
+      }
+ 
     return(
         <div className="mt-4 grow flex items-center justify-around">
             <div className="mb-64">

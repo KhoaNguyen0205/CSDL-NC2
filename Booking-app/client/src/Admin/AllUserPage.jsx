@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function AllUserPage(){
     const [user,setUser] = useState([]);
+    
     useEffect(() => {
         axios.get('/user').then(response => {
           setUser(response.data);

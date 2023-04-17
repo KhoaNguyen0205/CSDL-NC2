@@ -149,6 +149,14 @@ app.get('/user-places' , (req,res) => {
     });
 });
 
+app.get('/place-bookings' , (req,res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, jwtSecret, {}, async (err, placeData) => {
+        const {id} = placeData;
+        res.json( await Booking.find({Place:id}));
+    });
+})
+
 app.get('/places/:id', async (req,res) => {
     const {id} = req.params;
     res.json(await Place.findById(id))
@@ -164,20 +172,21 @@ app.put('/places', async (req,res) =>{
     const {token} = req.cookies;
     const {
         id,title,address,photos,description,
-        perks,extraInfo,checkIn,checkOut,maxGuests,price,
+        perks,extraInfo,checkIn,checkOut,maxGuests,price,approval,
     }= req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData)=>{
       const placeDoc = await Place.findById(id);
       if(userData.id === placeDoc.owner.toString()){
         placeDoc.set({
             title,address,photos,description,
-            perks,extraInfo,checkIn,checkOut,maxGuests,price,
+            perks,extraInfo,checkIn,checkOut,maxGuests,price,approval:false,
         });
         await placeDoc.save();
         res.json('ok');
       }
     });
 });
+
 app.put('/places/:id', (req, res) => {
     const { id } = req.params;
     const { approval } = req.body;
@@ -224,6 +233,7 @@ app.get('/places',async(req, res) => {
 app.get('/bookings1',async(req, res) => {
     res.json(await Booking.find())
 })
+
 app.delete('/delete/:id' ,async(req,res) => {
     const id = req.params.id;
     await User.findByIdAndRemove(id).exec();
@@ -236,11 +246,7 @@ app.delete('/deletePlace/:id' ,async(req,res) => {
     res.send('delete');
 });
 
-app.delete('/deleteBooking/:id' ,async(req,res) => {
-    const id = req.params.id;
-    await Booking.findByIdAndRemove(id).exec();
-    res.send('delete');
-});
+
 
 
 app.get('/places', async (req, res) => {

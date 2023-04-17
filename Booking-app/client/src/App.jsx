@@ -22,6 +22,7 @@ import BookingsPage from './pages/BookingsPage'
 import BookingPage from './pages/BookingPage'
 import DetailsPlacePage from './Admin/DetailsPlacePage'
 import ClientPage from './pages/ClientPage'
+import AppRovePage from './Admin/AppRovePage'
 
 axios.defaults.baseURL='http://localhost:4000/'
 axios.defaults.withCredentials = true; 
@@ -55,6 +56,7 @@ function App() {
      <Route path='/adminPage/allbooking' element={<AllBookingPage />}  />
      <Route path='/adminpage/alluser/newuser' element={<NewUser/>} />
      <Route path='/details/:id' element={<DetailsPlacePage/>} />
+     <Route path='/adminPage/approve' element={<AppRovePage />} />
      </Routes>
      </UserContextProvider>
      
