@@ -41,28 +41,23 @@ export default function AllPlacePage(){
       <div className="mt-8 ml-20 mr-20 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 ">
       {places.filter(place => place.approval).map(place => (
     <div>  
-      {place.approval === true &&
       <div className="w-70 h-30 bg-white-100 rounded-2xl">
       {place.photos?.[0] && (
         <img className="rounded-2xl object-cover" src={'http://localhost:4000/'+place.photos?.[0]} alt=""/>
       )}
       <h2 className="font-bold ">{place.title}</h2>
       <h2>  <b>Owner: {findPlaceOwner(place,user)}</b></h2>
-      </div>
-      }        
-       
-      {place.approval === true &&
+      </div>         
        <div>
       <Link to={'/details/'+place._id}>
       <button className="ml-15 inline-flex gap-1 py-2 px-6 rounded-full" >
-          Details
+        Details
       </button>
       </Link>
       <button className="ml-20 inline-flex bg-primary gap-1 py-2 px-6 rounded-full" onClick={() => deletePlace(place._id)}>
-                Delete
-            </button>
+        Delete
+      </button>
        </div>
-      }
       <div className="mt-5">
      </div> 
     </div>
@@ -71,3 +66,4 @@ export default function AllPlacePage(){
   </div>
 );
 }
+

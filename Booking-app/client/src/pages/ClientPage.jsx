@@ -8,17 +8,16 @@ export default function ClientPage() {
   const [places, setPlaces] = useState([]);
  
 
-  useEffect(() => {
-    axios.get('/user-places').then(({data}) => {
-      setPlaces(data);
-    });
-  }, []);
-
   
-
   useEffect(() => {
     axios.get('/bookings1').then(response => {
       setBookings(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get('/user-places').then(({data}) => {
+      setPlaces(data);
     });
   }, []);
 

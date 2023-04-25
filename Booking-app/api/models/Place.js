@@ -13,6 +13,7 @@ const PlaceSchema = new mongoose.Schema({
     maxGuests: Number,
     price : Number,
     approval : Boolean,
+    comments: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment' },
 });
 
 const PlaceModel = mongoose.model('Place', PlaceSchema);
