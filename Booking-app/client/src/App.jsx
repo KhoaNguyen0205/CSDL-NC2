@@ -23,6 +23,9 @@ import BookingPage from './pages/BookingPage'
 import DetailsPlacePage from './Admin/DetailsPlacePage'
 import ClientPage from './pages/ClientPage'
 import AppRovePage from './Admin/AppRovePage'
+import DB from './Admin/DetailBooking'
+import StatisticalPage from './Admin/statisticalPage'
+import ChartPage from './Admin/Chart'
 
 axios.defaults.baseURL='http://localhost:4000/'
 axios.defaults.withCredentials = true; 
@@ -57,6 +60,9 @@ function App() {
      <Route path='/adminpage/alluser/newuser' element={<NewUser/>} />
      <Route path='/details/:id' element={<DetailsPlacePage/>} />
      <Route path='/adminPage/approve' element={<AppRovePage />} />
+     <Route path='/adminPage/detailBookings' element={<DB />} />
+     <Route path='/adminPage/statis' element={<StatisticalPage />} />
+     <Route path='/adminPage/chart' element={<ChartPage />} />
      </Routes>
      </UserContextProvider>
      
